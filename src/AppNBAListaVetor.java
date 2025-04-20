@@ -1,6 +1,4 @@
-import java.io.*;
 import java.util.Scanner;
-
 
 class ListaLinear {
 
@@ -162,158 +160,6 @@ class ListaLinear {
     }
 }
 
-class Jogador {
-
-    private int id, altura, peso, anoNascimento;
-    private String nome, universidade, cidadeNascimento, estadoNascimento;
-
-    public Jogador() {
-//        this.id = ;
-        this.altura = 0;
-        this.peso = 0;
-        this.anoNascimento = 0;
-        this.nome = "";
-        this.universidade = "";
-        this.cidadeNascimento = "";
-        this.estadoNascimento = "";
-    }
-
-    public Jogador(int id, int altura, int peso, int anoNascimento, String nome, String universidade, String cidadeNascimento, String estadoNascimento) {
-        this.id = id;
-        this.altura = altura;
-        this.peso = peso;
-        this.anoNascimento = anoNascimento;
-        this.nome = nome;
-        this.universidade = universidade;
-        this.cidadeNascimento = cidadeNascimento;
-        this.estadoNascimento = estadoNascimento;
-    }
-
-    public void imprime() {
-        System.out.println("[" + this.getId() + " ## " + this.getNome() + " ## " + this.getAltura() + " ## " + this.getPeso() + " ## " + this.getAnoNascimento() + " ## " + this.getUniversidade() + " ## " + this.getCidadeNascimento() + " ## " + this.getEstadoNascimento() + "]");
-    }
-
-    public Jogador clone() {
-        return new Jogador(id, altura, peso, anoNascimento, nome, universidade, cidadeNascimento, estadoNascimento);
-    }
-
-    public void ler(Jogador jogador) {
-        System.out.println("ID:" + jogador.id);
-        System.out.println("Altura:" + jogador.altura);
-        System.out.println("Peso:" + jogador.peso);
-        System.out.println("Ano Nascimento:" + jogador.anoNascimento);
-        System.out.println("Nome:" + jogador.nome);
-        System.out.println("Universidade:" + jogador.universidade);
-        System.out.println("Cidade Nascimento:" + jogador.cidadeNascimento);
-        System.out.println("Estado Nascimento" + jogador.estadoNascimento);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getAltura() {
-        return altura;
-    }
-
-    public void setAltura(int altura) {
-        this.altura = altura;
-    }
-
-    public int getPeso() {
-        return peso;
-    }
-
-    public void setPeso(int peso) {
-        this.peso = peso;
-    }
-
-    public int getAnoNascimento() {
-        return anoNascimento;
-    }
-
-    public void setAnoNascimento(int anoNascimento) {
-        this.anoNascimento = anoNascimento;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getUniversidade() {
-        return universidade;
-    }
-
-    public void setUniversidade(String universidade) {
-        this.universidade = universidade;
-    }
-
-    public String getCidadeNascimento() {
-        return cidadeNascimento;
-    }
-
-    public void setCidadeNascimento(String cidadeNascimento) {
-        this.cidadeNascimento = cidadeNascimento;
-    }
-
-    public String getEstadoNascimento() {
-        return estadoNascimento;
-    }
-
-    public void setEstadoNascimento(String estadoNascimento) {
-        this.estadoNascimento = estadoNascimento;
-    }
-
-}
-
-
-class ArquivoTextoLeitura {
-    private BufferedReader entrada;
-
-    ArquivoTextoLeitura(String nomeArquivo) {
-        try {
-            entrada = new BufferedReader(new InputStreamReader(new
-                    FileInputStream(nomeArquivo), "UTF-8"));
-        } catch (UnsupportedEncodingException excecao) {
-            System.out.println(excecao.getMessage());
-        } catch (FileNotFoundException excecao) {
-            System.out.println("Arquivo nao encontrado");
-        }
-    }
-
-    public void fecharArquivo() {
-        try {
-            entrada.close();
-        } catch (IOException excecao) {
-            System.out.println("Erro no fechamento do arquivo de leitura: " +
-                    excecao);
-        }
-    }
-
-    @SuppressWarnings("finally")
-    public String ler() {
-        String textoEntrada = null;
-        try {
-            textoEntrada = entrada.readLine();
-        } catch (EOFException excecao) { //Excecao de final de arquivo.
-            textoEntrada = null;
-        } catch (IOException excecao) {
-            System.out.println("Erro de leitura: " + excecao);
-            textoEntrada = null;
-        } finally {
-            return textoEntrada;
-        }
-    }
-}
-
 public class AppNBAListaVetor {
     public static void main(String[] args) {
 
@@ -400,32 +246,34 @@ public class AppNBAListaVetor {
 
                         String[] dados_linha_2 = linha2.split(" ");
 
-                        if (dados_linha_2[0].equals("II")) {
+                        String value = dados_linha_2[0];
+
+                        if (value.equals("II")) {
                             try {
                                 listalinear_jogadores.inserirInicio(listaJogadores[Integer.parseInt(dados_linha_2[1])]);
                             } catch (Exception e) {
 //                    System.out.println(e.getMessage());
                             }
-                        } else if (dados_linha_2[0].equals("IF")) {
+                        } else if (value.equals("IF")) {
                             try {
                                 listalinear_jogadores.inserirFim(listaJogadores[Integer.parseInt(dados_linha_2[1])]);
                             } catch (Exception e) {
 //                    System.out.println(e.getMessage());
                             }
-                        } else if (dados_linha_2[0].equals("I*")) {
+                        } else if (value.equals("I*")) {
                             try {
                                 listalinear_jogadores.inserir(listaJogadores[Integer.parseInt(dados_linha_2[2])], Integer.parseInt(dados_linha_2[1]));
                             } catch (Exception e) {
 //                    System.out.println(e.getMessage());
                             }
-                        } else if (dados_linha_2[0].equals("RI")) {
+                        } else if (value.equals("RI")) {
                             try {
                                 removido_lista = listalinear_jogadores.removerInicio();
                                 System.out.println("(R) " + removido_lista.getNome());
                             } catch (Exception e) {
 //                    System.out.println(e.getMessage());
                             }
-                        } else if (dados_linha_2[0].equals("RF")) {
+                        } else if (value.equals("RF")) {
 
                             try {
                                 removido_lista = listalinear_jogadores.removerFim();
@@ -433,7 +281,7 @@ public class AppNBAListaVetor {
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                             }
-                        } else if (dados_linha_2[0].equals("R*")) {
+                        } else if (value.equals("R*")) {
                             try {
                                 removido_lista = listalinear_jogadores.remover(Integer.parseInt(dados_linha_2[1]));
                                 System.out.println("(R) " + removido_lista.getNome());
